@@ -1,20 +1,35 @@
 #!/bin/bash
 
-# Ask the user to enter the name
-echo "The directory has to have a name"
+# User should enter name
+echo "The directory has to contain a name"
 read -p "Please,Enter your directory name: " name
+if [ -z "$name" ]; then
+	echo "the name you entered is empty"
+	exit 1
+fi
+if ! [[ "$name" =~ ^[a-zA-Z\s]+$ ]]; then
+	echo "dont type numbers as name"
+	exit 1
 
+fi
 # Creating the folder
 
 dir="submission_reminder_$name"
-mkdir -p "$dir"
+
+if [ -d "$dir" ]; then
+	echo "directory already exists"
+	exit 1
+else
+	mkdir -p "$dir"
+	echo "the directory has been created"
+fi
 # creating subdirectories and files
 
 mkdir -p "$dir/app"
-mkdir -p "dir/modules"
-mkdir -p "dir/assets"
-mkdir -p "dir/config"
-[! -f "$dir/app/reminder.sh" ] && touch "$dir/app/reminder.sh"
+mkdir -p "$dir/modules"
+mkdir -p "$dir/assets"
+mkdir -p "$dir/config"
+[ ! -f "$dir/app/reminder.sh" ] && touch "$dir/app/reminder.sh"
 [ ! -f "$dir/modules/functions.sh" ] && touch "$dir/modules/functions.sh"
 [ ! -f "$dir/assets/submissions.txt" ] && touch "$dir/assets/submissions.txt"
 [ ! -f "$dir/config/config.env" ] && touch "$dir/config/config.env"
@@ -94,4 +109,7 @@ cat << 'EOL' > "$dir/startup.sh"
 cd "$(dirname "$0")"
 bash ./app/reminder.sh
 EOL
+# make the files executable
+find . -type f -name "*.sh" -exec chmod +x {} \;
+echo "I'm done. Check $dir"
 

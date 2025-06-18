@@ -1,4 +1,5 @@
-!/bin/bash
+
+#!/bin/bash
 
 # Source environment variables and helper functions
 source ./config/config.env
