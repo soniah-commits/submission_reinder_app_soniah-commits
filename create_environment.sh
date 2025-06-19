@@ -93,11 +93,11 @@ DAYS_REMAINING=2
 # Adding contents in startup.sh
 
 cat <<EOL >> "$dir/assets/submissions.txt"
-Robert, Git, not submitted
-Tony, Shell Navigation, submitted
-Oleg, Git, not submitted
-Scott, Shell Basics, not submitted
-Audrey, Shell Navigation, submitted
+Soniah, Git, not submitted
+Keza, Shell Navigation, submitted
+Ishimwe, Git, not submitted
+Manzi, Shell Basics, not submitted
+Bob, Shell Navigation, submitted
 EOL
 
 # Create startup.sh with logic to run the app
